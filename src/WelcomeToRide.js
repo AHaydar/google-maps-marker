@@ -1,9 +1,13 @@
 import React from 'react';
-import Map from './Map';
+import MapContainer from './MapContainer';
+import LatLngInput from './LatLngInput';
 
 class WelcomeToRide extends React.Component {
     state = {
-        showMap: false
+        showMap: false,
+        lat: '',
+        lng: '',
+        setMarker: false,
     }
     
     handleButtonClick = () => {
@@ -11,6 +15,22 @@ class WelcomeToRide extends React.Component {
             showMap: !this.state.showMap
         })
     }
+
+    handleInputChange = (event) => {
+        const id = event.target.id;
+        this.setState({
+            [id]: event.target.value
+        });
+    }
+
+    handleSubmit = (event) => {
+        this.setState({
+            setMarker: true
+        })
+        console.log("Submitted the kousa ya mousa");
+        
+    }
+
     render () {
         return(
             <>
@@ -26,7 +46,22 @@ class WelcomeToRide extends React.Component {
                         onClick={this.handleButtonClick}>
                             {this.state.showMap ? "I'm bored.. Hide the map" : "Show me the map"}
                     </button>
-                    {this.state.showMap ? <Map />: null}
+                    {this.state.showMap ? 
+                        <>
+                            <MapContainer 
+                                lat={this.state.lat}
+                                lng={this.state.lng}
+                                setMarker={this.state.setMarker}
+                            />
+                            <br />
+                            <LatLngInput 
+                                lat={this.state.lat}
+                                lng={this.state.lng}
+                                onChange={this.handleInputChange}
+                                onSubmit={this.handleSubmit}    
+                            />
+                        </>
+                        : null}
                 </div>
             </>
         );
