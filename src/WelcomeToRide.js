@@ -32,9 +32,7 @@ class WelcomeToRide extends React.Component {
                     lng: this.state.lng,
                 }
             ]
-        })
-        console.log("Submitted the kousa ya mousa");
-        
+        });        
     }
 
     render () {
