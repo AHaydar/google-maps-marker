@@ -8,6 +8,7 @@ class WelcomeToRide extends React.Component {
         lat: '',
         lng: '',
         setMarker: false,
+        markerCoordinates: [],
     }
     
     handleButtonClick = () => {
@@ -25,7 +26,13 @@ class WelcomeToRide extends React.Component {
 
     handleSubmit = (event) => {
         this.setState({
-            setMarker: true
+            markerCoordinates: [
+                ...this.state.markerCoordinates, 
+                {
+                    lat: this.state.lat,
+                    lng: this.state.lng,
+                }
+            ]
         })
         console.log("Submitted the kousa ya mousa");
         
@@ -51,7 +58,7 @@ class WelcomeToRide extends React.Component {
                             <MapContainer 
                                 lat={this.state.lat}
                                 lng={this.state.lng}
-                                setMarker={this.state.setMarker}
+                                markerCoordinates={this.state.markerCoordinates}
                             />
                             <br />
                             <LatLngInput 
