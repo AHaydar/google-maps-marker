@@ -5,6 +5,7 @@ const LatLngInput = ({ lat, lng, onChange, onSubmit }) => (
         <label>
             Latitude:
             <input 
+                className="coordinates-input"
                 id="lat" 
                 type="text"
                 value={lat}
@@ -15,6 +16,7 @@ const LatLngInput = ({ lat, lng, onChange, onSubmit }) => (
         <label>
             Longitude:
             <input
+                className="coordinates-input"
                 id="lng"
                 type="text"
                 value={lng}
