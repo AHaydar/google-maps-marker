@@ -4,71 +4,85 @@ import LatLngInput from './LatLngInput';
 
 class WelcomeToRide extends React.Component {
     state = {
-        showMap: false,
-        lat: '',
-        lng: '',
-        markerCoordinates: [],
+      showMap: false,
+      lat: '',
+      lng: '',
+      markerCoordinates: [
+        {
+          id: 0,
+        },
+      ],
     }
-    
+
     handleButtonClick = () => {
-        this.setState({
-            showMap: !this.state.showMap
-        })
+      const { showMap } = this.state;
+      this.setState({
+        showMap: !showMap,
+      });
     }
 
     handleInputChange = (event) => {
-        const id = event.target.id;
-        this.setState({
-            [id]: event.target.value
-        });
+      const { id } = event.target;
+      this.setState({
+        [id]: event.target.value,
+      });
     }
 
-    handleSubmit = (event) => {
-        this.setState({
-            markerCoordinates: [
-                ...this.state.markerCoordinates, 
-                {
-                    lat: this.state.lat,
-                    lng: this.state.lng,
-                }
-            ]
-        });        
+    handleSubmit = () => {
+      const { markerCoordinates, lat, lng } = this.state;
+      this.setState({
+        markerCoordinates: [
+          ...markerCoordinates,
+          {
+            id: markerCoordinates.id + 1,
+            lat,
+            lng,
+          },
+        ],
+      });
     }
 
-    render () {
-        return(
-            <>
-                <div className="welcome">
-                    <span className="welcome-title">Welcome to Ride Vis.</span>
-                    <br />
-                    <br />
-                    Please update your ride's coordinates and see it presented on the map.
-                    <br />
-                    <br />
-                    <button
-                        className="show-map-button"
-                        onClick={this.handleButtonClick}>
-                            {this.state.showMap ? "I'm bored.. Hide the map" : "Show me the map"}
-                    </button>
-                    {this.state.showMap ? 
-                        <>
-                            <MapContainer 
-                                lat={this.state.lat}
-                                lng={this.state.lng}
-                                markerCoordinates={this.state.markerCoordinates}
-                            />
-                            <br />
-                            <LatLngInput 
-                                lat={this.state.lat}
-                                lng={this.state.lng}
-                                onChange={this.handleInputChange}
-                                onSubmit={this.handleSubmit}    
-                            />
-                        </>
-                        : null}
-                </div>
-            </>
-        );
+    render() {
+      const {
+        showMap, lat, lng, markerCoordinates,
+      } = this.state;
+      return (
+        <>
+          <div className="welcome">
+            <span className="welcome-title">Welcome to Ride Vis.</span>
+            <br />
+            <br />
+                    Please update the coordinates of your ride and see it presented on the map.
+            <br />
+            <br />
+            <button
+              type="button"
+              className="show-map-button"
+              onClick={this.handleButtonClick}
+            >
+              {showMap ? "I'm bored.. Hide the map" : 'Show me the map'}
+            </button>
+            {showMap
+              ? (
+                <>
+                  <MapContainer
+                    lat={lat}
+                    lng={lng}
+                    markerCoordinates={markerCoordinates}
+                  />
+                  <br />
+                  <LatLngInput
+                    lat={lat}
+                    lng={lng}
+                    onChange={this.handleInputChange}
+                    onSubmit={this.handleSubmit}
+                  />
+                </>
+              )
+              : null}
+          </div>
+        </>
+      );
     }
 }
 
