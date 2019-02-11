@@ -19,8 +19,8 @@ class MapContainer extends React.Component {
                     zoom={14}
                 >
 
-                {this.props.markerCoordinates.map(coordinate => 
-                    <Marker position={{lat: coordinate.lat, lng: coordinate.lng}} />
+                {this.props.markerCoordinates.map((coordinate, index) => 
+                    <Marker key={index} position={{lat: coordinate.lat, lng: coordinate.lng}} />
                 )}
                 </Map>
             </div>

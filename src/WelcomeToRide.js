@@ -7,7 +7,6 @@ class WelcomeToRide extends React.Component {
         showMap: false,
         lat: '',
         lng: '',
-        setMarker: false,
         markerCoordinates: [],
     }
     
