@@ -8,9 +8,6 @@ class WelcomeToRide extends React.Component {
       lat: '',
       lng: '',
       markerCoordinates: [
-        {
-          id: 0,
-        },
       ],
     }
 
@@ -34,12 +31,12 @@ class WelcomeToRide extends React.Component {
         markerCoordinates: [
           ...markerCoordinates,
           {
-            id: markerCoordinates.id + 1,
             lat,
             lng,
           },
         ],
       });
+      console.log(markerCoordinates);
     }
 
     render() {
