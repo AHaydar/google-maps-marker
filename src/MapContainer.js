@@ -10,9 +10,9 @@ const MapContainer = ({ google, markerCoordinates }) => (
       zoom={14}
     >
 
-      {markerCoordinates.map(coordinate => (
+      {markerCoordinates.map((coordinate, index) => (
         <Marker
-          key={coordinate.id}
+          key={index}
           position={
               { lat: coordinate.lat, lng: coordinate.lng }
             }
@@ -23,13 +23,8 @@ const MapContainer = ({ google, markerCoordinates }) => (
   </div>
 );
 MapContainer.propTypes = {
-  google: PropTypes.string.isRequired,
-  markerCoordinates: PropTypes.shape([
-    {
-      lat: PropTypes.string.isRequired,
-      lng: PropTypes.string.isRequired,
-    },
-  ]).isRequired,
+  google: PropTypes.object.isRequired,
+  markerCoordinates: PropTypes.array.isRequired
 };
 
 export default GoogleApiWrapper({
