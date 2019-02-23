@@ -43,7 +43,6 @@ class WelcomeToRide extends React.Component {
       const {
         showMap, lat, lng, markerCoordinates,
       } = this.state;
-
       return (
         <>
           <div className="welcome">
